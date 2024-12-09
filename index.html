@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Karla:ital,wght@0,200..800;1,200..800&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>My Solution | Contact form</title>
+  </head>
+  <body>
+    <div class="success-state">
+      <div class="message-flexbox">
+      <img
+        src="./assets/images/icon-success-check.svg"
+        alt="checkbox icon"
+        class="checbock-icon"
+      />
+      <h3>Message Sent!</h3>
+    </div>
+      <p>Thanks for completing the form. We'll be in touch soon!</p>
+    </div>
+    <div class="container">
+      <h2>Contact Us</h2>
+      <div class="names-flexbox">
+        <div class="first-name">
+      <h4>First Name <span>*</span></h4>
+      <input type="text" />
+      <h4 class="first-name-error">This field is required</h4>
+    </div>
+    <div class="last-name">
+      <h4>Last Name <span>*</span></h4>
+      <input type="text" />
+      <h4 class="last-name-error">This field is required</h4>
+    </div>
+    </div>
+    <div class="email-address">
+      <h4>Email Address <span>*</span></h4>
+      <input type="text" />
+      <h4 class="email-error">Please enter a valid email address</h4>
+    </div>
+
+
+    <div class="query-type-checkbox">
+      <h4>Query Type <span>*</span></h4>
+
+      <div class="query-flexbox">
+
+      <div class="radio-wrapper">
+        <input type="radio" name="Enquiry" />
+        <label for="General-enquiry">General Enquiry</label>
+      </div>
+    
+    <div class="radio-wrapper">
+      <input type="radio" name="Support-request" />
+      <label for="Support-request">Support Request</label>
+    </div>
+  </div>
+    <h4 class="query-error">Please select a query type</h4>
+  </div>
+
+
+
+    <div class="messageInput">
+      <h4>Message <span>*</span></h4>
+      <input type="text">
+      <h4 class="message-error">This field is required</h4>
+    </div>
+
+    <div class="submit-checkbox">
+      <input type="checkbox">
+      <h4>I consent to being contacted by the team <span>*</span></h4>
+      
+    </div>
+    <h4 class="checkbox-error">To submit this
+      form, please consent to being contacted</h4>
+    <button>Submit</button>
+  </div>
+</div>
+
+<script>
+  
+  let successState = document.querySelector(".success-state");
+  let container = document.querySelector(".container");
+  let firstNameError = document.querySelector(".first-name-error");
+  let lastNameError = document.querySelector(".last-name-error");
+  let emailError = document.querySelector(".email-error");
+  let queryError = document.querySelector(".query-error");
+  let messageError = document.querySelector(".message-error");
+  let checkboxError = document.querySelector(".checkbox-error");
+
+  if (getComputedStyle(successState).display === "none") {
+    container.style.marginTop = "7.5rem"; 
+  } 
+
+  
+  function validateForm() {
+      let firstName = document.querySelector(".first-name input").value;
+      let lastName = document.querySelector(".last-name input").value;
+      let emailInput = document.querySelector(".email-address input").value;
+      let emailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailInput);
+      let queryType = document.querySelector('input[name="Enquiry"]:checked') || document.querySelector('input[name="Support-request"]:checked');
+      let message = document.querySelector(".messageInput input").value;
+      let consent = document.querySelector(".submit-checkbox input").checked;
+
+      let isValid = true;
+
+      
+      if (!firstName) {
+        firstNameError.style.display = "block";
+        isValid = false;
+      } else {
+        firstNameError.style.display = "none";
+      }
+
+      if (!lastName) {
+        lastNameError.style.display = "block";
+        isValid = false;
+      } else {
+        lastNameError.style.display = "none";
+      }
+
+     
+      if (!emailValid) {
+        emailError.style.display = "block";
+        isValid = false;
+      } else {
+        emailError.style.display = "none";
+      }
+
+      if (!queryType) {
+        queryError.style.display = "block";
+        isValid = false;
+      } else {
+        queryError.style.display = "none";
+      }
+
+     
+      if (!message) {
+        messageError.style.display = "block";
+        isValid = false;
+      } else {
+        messageError.style.display = "none";
+      }
+
+      
+      if (!consent) {
+        checkboxError.style.display = "block";
+        isValid = false;
+      } else {
+        checkboxError.style.display = "none";
+      }
+
+      return isValid;
+    }
+
+    document.querySelector("button").addEventListener("click", function(event) {
+      event.preventDefault();
+
+      if (validateForm()) {
+        successState.style.display = "block";
+        successState.style.marginBottom = "0";
+        container.style.marginTop = "0";
+      }
+    });
+
+
+
+</script>
+  </body>
+</html>
